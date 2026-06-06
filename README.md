@@ -32,32 +32,6 @@ uv sync
 
 On Linux, PyTorch is resolved from the ROCm 7.2 wheel index (see `pyproject.toml`). Adjust `[tool.uv.sources]` if you need CUDA or CPU-only builds.
 
-## Usage
-
-```python
-import torch
-from torch import nn
-
-from WraithAdam import WraithAdam
-from WraithAdamW import WraithAdamW
-
-model = nn.Linear(10, 1)
-
-# With decoupled weight decay (most common)
-optimizer = WraithAdamW(model.parameters(), lr=1e-3)
-
-# Without weight decay
-optimizer = WraithAdam(model.parameters(), lr=1e-3)
-
-loss_fn = nn.MSELoss()
-x, y = torch.randn(4, 10), torch.randn(4, 1)
-
-optimizer.zero_grad()
-loss = loss_fn(model(x), y)
-loss.backward()
-optimizer.step()
-```
-
 ### Parameters
 
 | Parameter | Default | Description |
@@ -83,4 +57,4 @@ uv run mypy WraithAdam.py WraithAdamW.py
 
 ## License
 
-See repository license file (if present).
+MIT — see [LICENSE](LICENSE).
